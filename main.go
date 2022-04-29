@@ -19,15 +19,20 @@ func main() {
 	userGroup := r.Group("/userinfo")
 	userGroup.Use(tools.Cors())
 	{
+
 		userGroup.GET("/", controller.ShowUser)
-		userGroup.POST("/search", controller.SelectUser)
+		userGroup.POST("/show", controller.SelectUser)
 		userGroup.GET("/add", controller.AddUser)
 		userGroup.POST("/add", controller.AddUser)
-		userGroup.POST("/update")
+		userGroup.GET("/update", controller.ShowUpdate)
+		userGroup.POST("/update", controller.Update)
+		userGroup.POST("/upload", controller.UploadFile)
+
 	}
-	r.GET("/upload", func(c *gin.Context) {
-		c.HTML(200, "upload.html", nil)
-	})
-	r.POST("/upload", controller.UploadFile)
+
+	companyGroup := r.Group("/company")
+	{
+		companyGroup.GET("/baseinfo", controller.CompanyInfo)
+	}
 	r.Run(":9091").Error()
 }

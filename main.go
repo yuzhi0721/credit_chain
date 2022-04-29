@@ -33,6 +33,10 @@ func main() {
 	companyGroup := r.Group("/company")
 	{
 		companyGroup.GET("/baseinfo", controller.CompanyInfo)
+		companyGroup.POST("/baseinfo", controller.CompanyInfoUpdate)
+		companyGroup.POST("/uploadLOGO", controller.UploadLOGO)
+		companyGroup.POST("/uploadUSCC", controller.UploadUSCC)
+
 	}
 	r.Run(":9091").Error()
 }
